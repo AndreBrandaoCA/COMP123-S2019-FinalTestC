@@ -42,5 +42,9 @@ namespace COMP123_S2019_FinalTestC.Views
                 MainTabControl.SelectedIndex++;
             }
         }
+        //first name list
+        //last name list
+        // check range and get one item of the list
+
     }
 }

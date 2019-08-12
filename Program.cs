@@ -25,5 +25,6 @@ namespace COMP123_S2019_FinalTestC
 
             Application.Run(characterForm);
         }
+
     }
 }
