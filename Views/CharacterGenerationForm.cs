@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using System.IO;
 using COMP123_S2019_FinalTestC.Objects;
 using System.Linq;
+using System.Diagnostics;
 /*
 * STUDENT NAME: ANDRE BRANDAO TEODORO
 * STUDENT ID: 300944427
@@ -24,7 +25,7 @@ namespace COMP123_S2019_FinalTestC.Views
         {
             InitializeComponent();
         }
-        #region backButton
+        #region BackButton
         /// <summary>
         /// This is the event handler for the BackButton Click event
         /// </summary>
@@ -55,38 +56,100 @@ namespace COMP123_S2019_FinalTestC.Views
         #region Save To File
         private void SaveToolStripButton_Click(object sender, EventArgs e)
         {
-            //// configure the file dialog
-            //CharacterSaveFileDialog.FileName = "Student.txt";
-            //CharacterSaveFileDialog.InitialDirectory = Directory.GetCurrentDirectory();
-            //CharacterSaveFileDialog.Filter = "Text Files (*.txt)|*.txt| All Files (*.*)|*.*";
+            // configure the file dialog
+            CharacterSaveFileDialog.FileName = "Character.txt";
+            CharacterSaveFileDialog.InitialDirectory = Directory.GetCurrentDirectory();
+            CharacterSaveFileDialog.Filter = "Text Files (*.txt)|*.txt| All Files (*.*)|*.*";
 
-            //// open the file dialog
-            //var result = CharacterSaveFileDialog.ShowDialog();
-            //if (result != DialogResult.Cancel)
-            //{
-            //    // open the stream for writing
-            //    using (StreamWriter outputStream = new StreamWriter(
-            //        File.Open(CharacterSaveFileDialog.FileName, FileMode.Create)))
-            //    {
-            //        // write content - string type - to the file
-            //        outputStream.WriteLine(Program.characterPortfolio.Identity.FirstName.ToString());
-            //        outputStream.WriteLine(characterPortfolio.Identity.LastName.ToString());
-            //        outputStream.WriteLine(characterPortfolio.Strength.StudentID);
-            //        outputStream.WriteLine(characterPortfolio.Dexterity.FirstName);
-            //        outputStream.WriteLine(characterPortfolio.student.LastName);
+            // open the file dialog
+            var result = CharacterSaveFileDialog.ShowDialog();
+            if (result != DialogResult.Cancel)
+            {
+                // open the stream for writing
+                using (StreamWriter outputStream = new StreamWriter(
+                    File.Open(CharacterSaveFileDialog.FileName, FileMode.Create)))
+                {
+                    // write content - string type - to the file
+                    outputStream.WriteLine(Program.characterPortfolio.Identity.FirstName);
+                    outputStream.WriteLine(Program.characterPortfolio.Identity.LastName);
+                    outputStream.WriteLine(Program.characterPortfolio.Strength);
+                    outputStream.WriteLine(Program.characterPortfolio.Dexterity);
+                    outputStream.WriteLine(Program.characterPortfolio.Endurance);
+                    outputStream.WriteLine(Program.characterPortfolio.Intellect);
+                    outputStream.WriteLine(Program.characterPortfolio.Education);
+                    outputStream.WriteLine(Program.characterPortfolio.SocialStanding);
 
-            //        // cleanup
-            //        outputStream.Close();
-            //        outputStream.Dispose();
+                    // cleanup
+                    outputStream.Close();
+                    outputStream.Dispose();
 
-            //        // give feedback to the user that the file has been saved
-            //        // this is a "modal" form
-            //        MessageBox.Show("File Saved...", "Saving File...",
-            //            MessageBoxButtons.OK, MessageBoxIcon.Information);
-            //    }
-            //}
+                    // give feedback to the user that the file has been saved
+                    // this is a "modal" form
+                    MessageBox.Show("File Saved...", "Saving File...",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
         }
 
+        #endregion
+        #region Open From File
+        /// <summary>
+        ///  This is the event handler for the open file
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OpenToolStripButton_Click(object sender, EventArgs e)
+        {
+            // configure the file dialog
+            CharacterOpenFileDialog.FileName = "Character.txt";
+            CharacterOpenFileDialog.InitialDirectory = Directory.GetCurrentDirectory();
+            CharacterOpenFileDialog.Filter = "Text Files (*.txt)|*.txt| All Files (*.*)|*.*";
+
+            // open the file dialog
+            var result = CharacterOpenFileDialog.ShowDialog();
+            if (result != DialogResult.Cancel)
+            {
+                try
+                {
+                    // Open the  streawm for reading
+                    using (StreamReader inputStream = new StreamReader(
+                        File.Open(CharacterOpenFileDialog.FileName, FileMode.Open)))
+                    {
+                        // read from the file
+                        Program.characterPortfolio.Identity.FirstName = inputStream.ReadLine();
+                        Program.characterPortfolio.Identity.LastName = inputStream.ReadLine();
+                        Program.characterPortfolio.Strength = inputStream.ReadLine();
+                        Program.characterPortfolio.Dexterity = inputStream.ReadLine();
+                        Program.characterPortfolio.Endurance = inputStream.ReadLine();
+                        Program.characterPortfolio.Intellect = inputStream.ReadLine();
+                        Program.characterPortfolio.Education = inputStream.ReadLine();
+                        Program.characterPortfolio.SocialStanding = inputStream.ReadLine();
+
+
+                        // cleanup
+                        inputStream.Close();
+                        inputStream.Dispose();
+                    }
+
+                    NextButton_Click(sender, e);
+                }
+                catch (IOException exception)
+                {
+
+                    Debug.WriteLine("ERROR: " + exception.Message);
+
+                    MessageBox.Show("ERROR: " + exception.Message, "ERROR",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                catch (FormatException exception)
+                {
+                    Debug.WriteLine("ERROR: " + exception.Message);
+
+                    MessageBox.Show("ERROR: " + exception.Message + "\n\nPlease select the appropriate file type", "ERROR",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
         #endregion
         #region Exit
         private void CharacterGenerationForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -100,7 +163,6 @@ namespace COMP123_S2019_FinalTestC.Views
 
         }
         #endregion
-        
         #region GenerateName
         /// <summary>
         /// This is the event handler for the Generate Name Button
@@ -130,7 +192,6 @@ namespace COMP123_S2019_FinalTestC.Views
 
 
         #endregion
-
         #region AbilitiesDistribution
         /// <summary>
         /// This is the event handler for the Abilities distribution
@@ -176,9 +237,8 @@ namespace COMP123_S2019_FinalTestC.Views
             EducationDataLabel.Text = Program.characterPortfolio.Education;
             SocialStandingDataLabel.Text = Program.characterPortfolio.SocialStanding;
         }
-        #endregion
 
-        // read and write file
-        // exit file
+
+        #endregion
     }
 }
