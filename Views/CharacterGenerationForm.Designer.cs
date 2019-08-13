@@ -545,8 +545,9 @@
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.aboutToolStripMenuItem.Text = "&About...";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.HelpToolStripButton_Click);
             // 
             // NextButton
             // 
@@ -560,6 +561,7 @@
             // 
             // BackButton
             // 
+            this.BackButton.Enabled = false;
             this.BackButton.Location = new System.Drawing.Point(12, 486);
             this.BackButton.Name = "BackButton";
             this.BackButton.Size = new System.Drawing.Size(136, 63);

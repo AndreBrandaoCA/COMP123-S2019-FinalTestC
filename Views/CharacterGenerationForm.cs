@@ -33,9 +33,15 @@ namespace COMP123_S2019_FinalTestC.Views
         /// <param name="e"></param>
         private void BackButton_Click(object sender, EventArgs e)
         {
+            NextButton.Enabled = true;
             if (MainTabControl.SelectedIndex != 0)
             {
+               
                 MainTabControl.SelectedIndex--;
+            }
+            else
+            {
+                BackButton.Enabled = false;
             }
         }
         #endregion
@@ -47,9 +53,15 @@ namespace COMP123_S2019_FinalTestC.Views
         /// <param name="e"></param>
         private void NextButton_Click(object sender, EventArgs e)
         {
+            BackButton.Enabled = true;
             if (MainTabControl.SelectedIndex < MainTabControl.TabPages.Count -1)
             {
+                
                 MainTabControl.SelectedIndex++;
+            }
+            else
+            {
+                NextButton.Enabled = false;
             }
         }
         #endregion
