@@ -54,6 +54,11 @@ namespace COMP123_S2019_FinalTestC.Views
         }
         #endregion
         #region Save To File
+        /// <summary>
+        /// This is the event handler for Save File button on Tool Strip and Menu Strip
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SaveToolStripButton_Click(object sender, EventArgs e)
         {
             // configure the file dialog
@@ -94,7 +99,7 @@ namespace COMP123_S2019_FinalTestC.Views
         #endregion
         #region Open From File
         /// <summary>
-        ///  This is the event handler for the open file
+        /// This is the event handler for Open file button on Tool Strip and Menu Strip
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -149,18 +154,6 @@ namespace COMP123_S2019_FinalTestC.Views
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-        }
-        #endregion
-        #region Exit
-        private void CharacterGenerationForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            Application.Exit();
-        }
-
-        private void CharacterGenerationForm_FormClosing(object sender, EventArgs e)
-        {
-            Application.Exit();
-
         }
         #endregion
         #region GenerateName
@@ -239,6 +232,22 @@ namespace COMP123_S2019_FinalTestC.Views
         }
 
 
+        #endregion
+        #region Exit
+        /// <summary>
+        /// These are the event handler for exiting the appliation
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void CharacterGenerationForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
+        }
         #endregion
     }
 }
