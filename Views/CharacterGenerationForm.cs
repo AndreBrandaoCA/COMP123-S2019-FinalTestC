@@ -193,7 +193,7 @@ namespace COMP123_S2019_FinalTestC.Views
         /// <param name="e"></param>   
         private void GenerateAbilitiesButton_Click(object sender, EventArgs e)
         {
-            int skillpoints = 15;
+            int skillpoints = 14;
             Program.characterPortfolio.Strength  = "0";;
             Program.characterPortfolio.Dexterity = "0";;
             Program.characterPortfolio.Endurance = "0";;
@@ -247,6 +247,17 @@ namespace COMP123_S2019_FinalTestC.Views
         private void CharacterGenerationForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             Application.Exit();
+        }
+        #endregion
+        #region AboutForm
+        /// <summary>
+        /// This is the event handler for the Help Tool Strip button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void HelpToolStripButton_Click(object sender, EventArgs e)
+        {
+            Program.aboutForm.ShowDialog();
         }
         #endregion
     }

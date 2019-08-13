@@ -17,6 +17,7 @@ namespace COMP123_S2019_FinalTestC
         // temporary
         public static CharacterGenerationForm characterForm;
         public static CharacterPortfolio characterPortfolio;
+        public static AboutForm aboutForm;
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -28,6 +29,7 @@ namespace COMP123_S2019_FinalTestC
 
             characterForm = new CharacterGenerationForm();
             characterPortfolio = new CharacterPortfolio();
+            aboutForm = new AboutForm();
             Application.Run(characterForm);
         }
 
