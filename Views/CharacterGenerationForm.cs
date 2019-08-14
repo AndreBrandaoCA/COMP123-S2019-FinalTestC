@@ -101,7 +101,6 @@ namespace COMP123_S2019_FinalTestC.Views
                     outputStream.Dispose();
 
                     // give feedback to the user that the file has been saved
-                    // this is a "modal" form
                     MessageBox.Show("File Saved...", "Saving File...",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
@@ -152,7 +151,7 @@ namespace COMP123_S2019_FinalTestC.Views
                 }
                 catch (IOException exception)
                 {
-
+                    // error handler
                     Debug.WriteLine("ERROR: " + exception.Message);
 
                     MessageBox.Show("ERROR: " + exception.Message, "ERROR",
@@ -160,6 +159,7 @@ namespace COMP123_S2019_FinalTestC.Views
                 }
                 catch (FormatException exception)
                 {
+                    // error handler
                     Debug.WriteLine("ERROR: " + exception.Message);
 
                     MessageBox.Show("ERROR: " + exception.Message + "\n\nPlease select the appropriate file type", "ERROR",
@@ -177,20 +177,19 @@ namespace COMP123_S2019_FinalTestC.Views
         /// <param name="e"></param>   
         private void GenerateNameButton_Click(object sender, EventArgs e)
         {
-
+            // read first name file and assign random to property
             string firstNameFile = "C:\\Users\\Andre\\Desktop\\COMP123-S2019-FinalTestC\\Data\\firstNames.txt";
-
             var readAllLinesfirstNameFile = File.ReadAllLines(firstNameFile);
             List<string> firstNameList = readAllLinesfirstNameFile.ToList();
             int firstNameFileLength = readAllLinesfirstNameFile.Length;
             Program.characterPortfolio.Identity.FirstName = firstNameList[rand.Next(firstNameFileLength)];
-
+            // read last name file and assign random to property
             string lastNameFile = "C:\\Users\\Andre\\Desktop\\COMP123-S2019-FinalTestC\\Data\\lastNames.txt";
             var readAllLineslastNameFile = File.ReadAllLines(lastNameFile);
             List<string> lastNameList = readAllLineslastNameFile.ToList();
             int lastNameListeFileLength = readAllLineslastNameFile.Length;
             Program.characterPortfolio.Identity.LastName = lastNameList[rand.Next(lastNameListeFileLength)];
-
+            // updating form with values
             FirstNameDataLabel.Text = Program.characterPortfolio.Identity.FirstName;
             LastNameDataLabel.Text = Program.characterPortfolio.Identity.LastName;
         }
@@ -205,6 +204,7 @@ namespace COMP123_S2019_FinalTestC.Views
         /// <param name="e"></param>   
         private void GenerateAbilitiesButton_Click(object sender, EventArgs e)
         {
+            // assign skill points to random ability
             int skillpoints = 14;
             Program.characterPortfolio.Strength  = "0";;
             Program.characterPortfolio.Dexterity = "0";;
@@ -235,6 +235,7 @@ namespace COMP123_S2019_FinalTestC.Views
                         break;
                 }
             }
+            // update form with values
             StrengthDataLabel.Text = Program.characterPortfolio.Strength;
             DexterityDataLabel.Text = Program.characterPortfolio.Dexterity;
             EnduranceDataLabel.Text = Program.characterPortfolio.Endurance;
@@ -261,7 +262,7 @@ namespace COMP123_S2019_FinalTestC.Views
             Application.Exit();
         }
         #endregion
-        #region AboutForm
+        #region HelpToolStripButton
         /// <summary>
         /// This is the event handler for the Help Tool Strip button
         /// </summary>

@@ -39,7 +39,5 @@ namespace COMP123_S2019_FinalTestC.Objects
             this.Education = "0";
             this.SocialStanding = "0";
         }
-
-
     }
 }
