@@ -63,6 +63,10 @@ namespace COMP123_S2019_FinalTestC.Views
             {
                 NextButton.Enabled = false;
             }
+            if(MainTabControl.SelectedIndex == 3)
+            {
+                LoadCharacterSheet();
+            }
         }
         #endregion
         #region Save To File
@@ -95,6 +99,10 @@ namespace COMP123_S2019_FinalTestC.Views
                     outputStream.WriteLine(Program.characterPortfolio.Intellect);
                     outputStream.WriteLine(Program.characterPortfolio.Education);
                     outputStream.WriteLine(Program.characterPortfolio.SocialStanding);
+                    outputStream.WriteLine(Program.characterPortfolio.Skills[0].Name);
+                    outputStream.WriteLine(Program.characterPortfolio.Skills[1].Name);
+                    outputStream.WriteLine(Program.characterPortfolio.Skills[2].Name);
+                    outputStream.WriteLine(Program.characterPortfolio.Skills[3].Name);
 
                     // cleanup
                     outputStream.Close();
@@ -140,7 +148,10 @@ namespace COMP123_S2019_FinalTestC.Views
                         Program.characterPortfolio.Intellect = inputStream.ReadLine();
                         Program.characterPortfolio.Education = inputStream.ReadLine();
                         Program.characterPortfolio.SocialStanding = inputStream.ReadLine();
-
+                        Program.characterPortfolio.Skills[0].Name = inputStream.ReadLine();
+                        Program.characterPortfolio.Skills[1].Name = inputStream.ReadLine();
+                        Program.characterPortfolio.Skills[2].Name = inputStream.ReadLine();
+                        Program.characterPortfolio.Skills[3].Name = inputStream.ReadLine();
 
                         // cleanup
                         inputStream.Close();
@@ -178,13 +189,13 @@ namespace COMP123_S2019_FinalTestC.Views
         private void GenerateNameButton_Click(object sender, EventArgs e)
         {
             // read first name file and assign random to property
-            string firstNameFile = "C:\\Users\\Andre\\Desktop\\COMP123-S2019-FinalTestC\\Data\\firstNames.txt";
+            string firstNameFile = "..\\..\\Data\\firstNames.txt";
             var readAllLinesfirstNameFile = File.ReadAllLines(firstNameFile);
             List<string> firstNameList = readAllLinesfirstNameFile.ToList();
             int firstNameFileLength = readAllLinesfirstNameFile.Length;
             Program.characterPortfolio.Identity.FirstName = firstNameList[rand.Next(firstNameFileLength)];
             // read last name file and assign random to property
-            string lastNameFile = "C:\\Users\\Andre\\Desktop\\COMP123-S2019-FinalTestC\\Data\\lastNames.txt";
+            string lastNameFile = "..\\..\\Data\\lastNames.txt";
             var readAllLineslastNameFile = File.ReadAllLines(lastNameFile);
             List<string> lastNameList = readAllLineslastNameFile.ToList();
             int lastNameListeFileLength = readAllLineslastNameFile.Length;
@@ -219,13 +230,21 @@ namespace COMP123_S2019_FinalTestC.Views
         private void GenerateSkillsButton_Click(object sender, EventArgs e)
         {
             Skill skill = new Skill();
+            Program.characterPortfolio.Skills.Clear();
             // read first name file and assign random to property
-            string SkillsFile = "C:\\Users\\Andre\\Desktop\\COMP123-S2019-FinalTestC\\Data\\skills.txt";
+            string SkillsFile = "..\\..\\Data\\skills.txt";
             var readAllLinesSkillsFile = File.ReadAllLines(SkillsFile);
             List<string> SkillsList = readAllLinesSkillsFile.ToList();
             int SkillsFileLength = readAllLinesSkillsFile.Length;
-            skill.Name = SkillsList[rand.Next(SkillsFileLength)];
-            Program.characterPortfolio.Skills.Add(skill);
+            for(int i=0; i <= 3; i++)
+            {
+                skill.Name = SkillsList[rand.Next(SkillsFileLength)];
+                Program.characterPortfolio.Skills.Add(skill);
+            }
+            FirstCharacterSkillsDataLabel.Text = Program.characterPortfolio.Skills[0].Name;
+            SecondCharacterSkillsDataLabel.Text = Program.characterPortfolio.Skills[1].Name;
+            ThirdCharacterSkillsDataLabel.Text = Program.characterPortfolio.Skills[2].Name;
+            FourthCharacterSkillsDataLabel.Text = Program.characterPortfolio.Skills[3].Name;
         }
         #endregion
         #region Exit
@@ -253,6 +272,23 @@ namespace COMP123_S2019_FinalTestC.Views
         private void HelpToolStripButton_Click(object sender, EventArgs e)
         {
             Program.aboutForm.ShowDialog();
+        }
+        #endregion
+        #region LoadCharacterSheet
+        public void LoadCharacterSheet()
+        {
+            CharSheetFirstNameDataLabel.Text = Program.characterPortfolio.Identity.FirstName;
+            CharSheetLastNameDataLabel.Text = Program.characterPortfolio.Identity.LastName;
+            CharSheetStrengthDataLabel.Text = Program.characterPortfolio.Strength;
+            CharSheetDexDataLabel.Text       = Program.characterPortfolio.Dexterity;
+            CharSheetEnduranceDataLabel.Text = Program.characterPortfolio.Endurance;
+            CharSheetIntellectDataLabel.Text = Program.characterPortfolio.Intellect;
+            CharSheetEducationDataLabel.Text = Program.characterPortfolio.Education;
+            CharSheetSocStandingDataLabel.Text = Program.characterPortfolio.SocialStanding;
+            CharSheetFirstCharacterSkillsDataLabel.Text = Program.characterPortfolio.Skills[0].Name;
+            CharSheetSecondCharacterSkillsDataLabel.Text = Program.characterPortfolio.Skills[1].Name;
+            CharSheetThirdCharacterSkillsDataLabel.Text = Program.characterPortfolio.Skills[2].Name;
+            CharSheetFourthCharacterSkillsDataLabel.Text = Program.characterPortfolio.Skills[3].Name;
         }
         #endregion
 

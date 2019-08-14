@@ -6,7 +6,11 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+/*
+ * STUDENT NAME: ANDRE BRANDAO TEODORO
+ * STUDENT ID: 300944427
+ * DESCRIPTION: This is the about form for the application
+ */
 namespace COMP123_S2019_FinalTestC.Views
 {
     public partial class AboutForm : Form
