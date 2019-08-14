@@ -69,13 +69,87 @@ namespace COMP123_S2019_FinalTestC.Views
             }
         }
         #endregion
-        #region Save To File
+        #region AbilitiesPoints
         /// <summary>
-        /// This is the event handler for Save File button on Tool Strip and Menu Strip
+        /// This is the event handler for the Abilities distribution
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>   
+        private void GenerateAbilitiesButton_Click(object sender, EventArgs e)
+        {
+            const int SKILLCAP = 15;
+            // assign skill points and update form with values
+            StrengthDataLabel.Text      = Program.characterPortfolio.Strength = rand.Next(1, SKILLCAP).ToString();
+            DexterityDataLabel.Text     = Program.characterPortfolio.Dexterity = rand.Next(1, SKILLCAP).ToString();
+            EnduranceDataLabel.Text     = Program.characterPortfolio.Endurance = rand.Next(1, SKILLCAP).ToString();
+            IntellectDataLabel.Text     = Program.characterPortfolio.Intellect = rand.Next(1, SKILLCAP).ToString();
+            EducationDataLabel.Text     = Program.characterPortfolio.Education = rand.Next(1, SKILLCAP).ToString(); ;
+            SocialStandingDataLabel.Text = Program.characterPortfolio.SocialStanding = rand.Next(1, SKILLCAP).ToString();
+        }
+        #endregion
+        #region GenerateSkills
+        private void GenerateSkillsButton_Click(object sender, EventArgs e)
+        {
+            Program.characterPortfolio.Skills.Clear();
+            // read first name file and assign random to property
+            string SkillsFile = "..\\..\\Data\\skills.txt";
+            var readAllLinesSkillsFile = File.ReadAllLines(SkillsFile);
+            List<string> SkillsList = readAllLinesSkillsFile.ToList();
+            int SkillsFileLength = readAllLinesSkillsFile.Length;
+            for(int i=0; i <= 3; i++)
+            {
+                Skill skill = new Skill();
+                skill.Name = SkillsList[rand.Next(SkillsFileLength)];
+                Program.characterPortfolio.Skills.Add(skill);
+            }
+            FirstCharacterSkillsDataLabel.Text = Program.characterPortfolio.Skills[0].Name;
+            SecondCharacterSkillsDataLabel.Text = Program.characterPortfolio.Skills[1].Name;
+            ThirdCharacterSkillsDataLabel.Text = Program.characterPortfolio.Skills[2].Name;
+            FourthCharacterSkillsDataLabel.Text = Program.characterPortfolio.Skills[3].Name;
+        }
+        #endregion
+        #region Exit
+        /// <summary>
+        /// These are the event handler for exiting the appliation
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void SaveToolStripButton_Click(object sender, EventArgs e)
+        private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void CharacterGenerationForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
+        }
+        #endregion
+        #region GenerateNames
+        private void GenerateNames()
+        {
+            // read first name file and assign random to property
+            string firstNameFile = "..\\..\\Data\\firstNames.txt";
+            var readAllLinesfirstNameFile = File.ReadAllLines(firstNameFile);
+            List<string> firstNameList = readAllLinesfirstNameFile.ToList();
+            int firstNameFileLength = readAllLinesfirstNameFile.Length;
+            Program.characterPortfolio.Identity.FirstName = firstNameList[rand.Next(firstNameFileLength)];
+            // read last name file and assign random to property
+            string lastNameFile = "..\\..\\Data\\lastNames.txt";
+            var readAllLineslastNameFile = File.ReadAllLines(lastNameFile);
+            List<string> lastNameList = readAllLineslastNameFile.ToList();
+            int lastNameListeFileLength = readAllLineslastNameFile.Length;
+            Program.characterPortfolio.Identity.LastName = lastNameList[rand.Next(lastNameListeFileLength)];
+
+        }
+        #endregion
+        #region Form Load
+        private void CharacterGenerationForm_Load(object sender, EventArgs e)
+        {
+            GenerateNames();
+        }
+        #endregion
+        #region SaveFile
+        private void SaveFile()
         {
             // configure the file dialog
             CharacterSaveFileDialog.FileName = "Character.txt";
@@ -114,15 +188,9 @@ namespace COMP123_S2019_FinalTestC.Views
                 }
             }
         }
-
         #endregion
-        #region Open From File
-        /// <summary>
-        /// This is the event handler for Open file button on Tool Strip and Menu Strip
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void OpenToolStripButton_Click(object sender, EventArgs e)
+        #region OpenFile
+        private void OpenFile(object sender, EventArgs e)
         {
             // configure the file dialog
             CharacterOpenFileDialog.FileName = "Character.txt";
@@ -179,7 +247,42 @@ namespace COMP123_S2019_FinalTestC.Views
             }
         }
         #endregion
-        #region GenerateName
+        #region OpenToolStripMenuItem_Click
+        private void OpenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFile(sender, e);
+        }
+        #endregion
+        #region SaveToolStripButton_Click
+        /// <summary>
+        /// This is the event handler for Save File button on Tool Strip and Menu Strip
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SaveToolStripButton_Click(object sender, EventArgs e)
+        {
+            SaveFile();
+        }
+
+        #endregion
+        #region SaveToolStripMenuItem_Click
+        private void SaveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveFile();
+        }
+        #endregion
+        #region OpenToolStripButton_Click
+        /// <summary>
+        /// This is the event handler for Open file button on Tool Strip and Menu Strip
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OpenToolStripButton_Click(object sender, EventArgs e)
+        {
+            OpenFile(sender,e);
+        }
+        #endregion
+        #region GenerateNameButtonClick
         /// <summary>
         /// This is the event handler for the Generate Name Button
         /// It assigns a First and Last name based on the input from two files
@@ -188,79 +291,10 @@ namespace COMP123_S2019_FinalTestC.Views
         /// <param name="e"></param>   
         private void GenerateNameButton_Click(object sender, EventArgs e)
         {
-            // read first name file and assign random to property
-            string firstNameFile = "..\\..\\Data\\firstNames.txt";
-            var readAllLinesfirstNameFile = File.ReadAllLines(firstNameFile);
-            List<string> firstNameList = readAllLinesfirstNameFile.ToList();
-            int firstNameFileLength = readAllLinesfirstNameFile.Length;
-            Program.characterPortfolio.Identity.FirstName = firstNameList[rand.Next(firstNameFileLength)];
-            // read last name file and assign random to property
-            string lastNameFile = "..\\..\\Data\\lastNames.txt";
-            var readAllLineslastNameFile = File.ReadAllLines(lastNameFile);
-            List<string> lastNameList = readAllLineslastNameFile.ToList();
-            int lastNameListeFileLength = readAllLineslastNameFile.Length;
-            Program.characterPortfolio.Identity.LastName = lastNameList[rand.Next(lastNameListeFileLength)];
-
+            GenerateNames();
             // updating form with values
             FirstNameDataLabel.Text = Program.characterPortfolio.Identity.FirstName;
             LastNameDataLabel.Text = Program.characterPortfolio.Identity.LastName;
-        }
-
-
-        #endregion
-        #region AbilitiesPoints
-        /// <summary>
-        /// This is the event handler for the Abilities distribution
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>   
-        private void GenerateAbilitiesButton_Click(object sender, EventArgs e)
-        {
-            const int SKILLCAP = 15;
-            // assign skill points and update form with values
-            StrengthDataLabel.Text      = Program.characterPortfolio.Strength = rand.Next(1, SKILLCAP).ToString();
-            DexterityDataLabel.Text     = Program.characterPortfolio.Dexterity = rand.Next(1, SKILLCAP).ToString();
-            EnduranceDataLabel.Text     = Program.characterPortfolio.Endurance = rand.Next(1, SKILLCAP).ToString();
-            IntellectDataLabel.Text     = Program.characterPortfolio.Intellect = rand.Next(1, SKILLCAP).ToString();
-            EducationDataLabel.Text     = Program.characterPortfolio.Education = rand.Next(1, SKILLCAP).ToString(); ;
-            SocialStandingDataLabel.Text = Program.characterPortfolio.SocialStanding = rand.Next(1, SKILLCAP).ToString();
-        }
-        #endregion
-        #region GenerateSkills
-        private void GenerateSkillsButton_Click(object sender, EventArgs e)
-        {
-            Program.characterPortfolio.Skills.Clear();
-            // read first name file and assign random to property
-            string SkillsFile = "..\\..\\Data\\skills.txt";
-            var readAllLinesSkillsFile = File.ReadAllLines(SkillsFile);
-            List<string> SkillsList = readAllLinesSkillsFile.ToList();
-            int SkillsFileLength = readAllLinesSkillsFile.Length;
-            for(int i=0; i <= 3; i++)
-            {
-                Skill skill = new Skill();
-                skill.Name = SkillsList[rand.Next(SkillsFileLength)];
-                Program.characterPortfolio.Skills.Add(skill);
-            }
-            FirstCharacterSkillsDataLabel.Text = Program.characterPortfolio.Skills[0].Name;
-            SecondCharacterSkillsDataLabel.Text = Program.characterPortfolio.Skills[1].Name;
-            ThirdCharacterSkillsDataLabel.Text = Program.characterPortfolio.Skills[2].Name;
-            FourthCharacterSkillsDataLabel.Text = Program.characterPortfolio.Skills[3].Name;
-        }
-        #endregion
-        #region Exit
-        /// <summary>
-        /// These are the event handler for exiting the appliation
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
-
-        private void CharacterGenerationForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            Application.Exit();
         }
         #endregion
         #region HelpToolStripButton
@@ -280,7 +314,7 @@ namespace COMP123_S2019_FinalTestC.Views
             CharSheetFirstNameDataLabel.Text = Program.characterPortfolio.Identity.FirstName;
             CharSheetLastNameDataLabel.Text = Program.characterPortfolio.Identity.LastName;
             CharSheetStrengthDataLabel.Text = Program.characterPortfolio.Strength;
-            CharSheetDexDataLabel.Text       = Program.characterPortfolio.Dexterity;
+            CharSheetDexDataLabel.Text = Program.characterPortfolio.Dexterity;
             CharSheetEnduranceDataLabel.Text = Program.characterPortfolio.Endurance;
             CharSheetIntellectDataLabel.Text = Program.characterPortfolio.Intellect;
             CharSheetEducationDataLabel.Text = Program.characterPortfolio.Education;
@@ -290,8 +324,17 @@ namespace COMP123_S2019_FinalTestC.Views
             CharSheetThirdCharacterSkillsDataLabel.Text = Program.characterPortfolio.Skills[2].Name;
             CharSheetFourthCharacterSkillsDataLabel.Text = Program.characterPortfolio.Skills[3].Name;
         }
-        #endregion
 
+        #endregion
+        #region MainTabControl_TabIndexChanged
+        private void MainTabControl_TabIndexChanged(object sender, EventArgs e)
+        {
+            if (MainTabControl.SelectedIndex == 3)
+            {
+                LoadCharacterSheet();
+            }
+        }
+        #endregion
 
     }
 }
