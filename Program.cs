@@ -2,6 +2,7 @@
 using COMP123_S2019_FinalTestC.Views;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -12,9 +13,9 @@ using System.Windows.Forms;
  */
 namespace COMP123_S2019_FinalTestC
 {
+    
     public static class Program
     {
-        // temporary
         public static CharacterGenerationForm characterForm;
         public static CharacterPortfolio characterPortfolio;
         public static SplashForm splashForm;
@@ -25,6 +26,7 @@ namespace COMP123_S2019_FinalTestC
         [STAThread]
         static void Main()
         {
+            
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
@@ -36,6 +38,5 @@ namespace COMP123_S2019_FinalTestC
 
             Application.Run(splashForm);
         }
-
     }
 }

@@ -20,7 +20,7 @@ namespace COMP123_S2019_FinalTestC.Views
     
     public partial class CharacterGenerationForm : COMP123_S2019_FinalTestC.Views.MasterForm
     {
-        Random rand = new Random();
+        public static Random rand = new Random();
         public CharacterGenerationForm()
         {
             InitializeComponent();
@@ -189,6 +189,7 @@ namespace COMP123_S2019_FinalTestC.Views
             List<string> lastNameList = readAllLineslastNameFile.ToList();
             int lastNameListeFileLength = readAllLineslastNameFile.Length;
             Program.characterPortfolio.Identity.LastName = lastNameList[rand.Next(lastNameListeFileLength)];
+
             // updating form with values
             FirstNameDataLabel.Text = Program.characterPortfolio.Identity.FirstName;
             LastNameDataLabel.Text = Program.characterPortfolio.Identity.LastName;
@@ -196,7 +197,7 @@ namespace COMP123_S2019_FinalTestC.Views
 
 
         #endregion
-        #region AbilitiesDistribution
+        #region AbilitiesPoints
         /// <summary>
         /// This is the event handler for the Abilities distribution
         /// </summary>
@@ -204,47 +205,28 @@ namespace COMP123_S2019_FinalTestC.Views
         /// <param name="e"></param>   
         private void GenerateAbilitiesButton_Click(object sender, EventArgs e)
         {
-            // assign skill points to random ability
-            int skillpoints = 14;
-            Program.characterPortfolio.Strength  = "0";;
-            Program.characterPortfolio.Dexterity = "0";;
-            Program.characterPortfolio.Endurance = "0";;
-            Program.characterPortfolio.Intellect = "0";;
-            Program.characterPortfolio.Education = "0"; ;
-            Program.characterPortfolio.SocialStanding = "0"; ;
-            for (int i = 0; i< skillpoints; i++) {
-                int point = rand.Next(1, 7);
-                switch(point){
-                    case 1:
-                        Program.characterPortfolio.Strength = (Int32.Parse(Program.characterPortfolio.Strength) + 1).ToString();
-                        break;
-                    case 2:
-                        Program.characterPortfolio.Dexterity = (Int32.Parse(Program.characterPortfolio.Dexterity) + 1).ToString();
-                        break;
-                    case 3:
-                        Program.characterPortfolio.Endurance = (Int32.Parse(Program.characterPortfolio.Endurance) + 1).ToString();
-                        break;
-                    case 4:
-                        Program.characterPortfolio.Intellect = (Int32.Parse(Program.characterPortfolio.Intellect) + 1).ToString();
-                        break;
-                    case 5:
-                        Program.characterPortfolio.Education = (Int32.Parse(Program.characterPortfolio.Strength) + 1).ToString();
-                        break;
-                    case 6:
-                        Program.characterPortfolio.SocialStanding = (Int32.Parse(Program.characterPortfolio.SocialStanding) + 1).ToString();
-                        break;
-                }
-            }
-            // update form with values
-            StrengthDataLabel.Text = Program.characterPortfolio.Strength;
-            DexterityDataLabel.Text = Program.characterPortfolio.Dexterity;
-            EnduranceDataLabel.Text = Program.characterPortfolio.Endurance;
-            IntellectDataLabel.Text = Program.characterPortfolio.Intellect;
-            EducationDataLabel.Text = Program.characterPortfolio.Education;
-            SocialStandingDataLabel.Text = Program.characterPortfolio.SocialStanding;
+            const int SKILLCAP = 15;
+            // assign skill points and update form with values
+            StrengthDataLabel.Text      = Program.characterPortfolio.Strength = rand.Next(1, SKILLCAP).ToString();
+            DexterityDataLabel.Text     = Program.characterPortfolio.Dexterity = rand.Next(1, SKILLCAP).ToString();
+            EnduranceDataLabel.Text     = Program.characterPortfolio.Endurance = rand.Next(1, SKILLCAP).ToString();
+            IntellectDataLabel.Text     = Program.characterPortfolio.Intellect = rand.Next(1, SKILLCAP).ToString();
+            EducationDataLabel.Text     = Program.characterPortfolio.Education = rand.Next(1, SKILLCAP).ToString(); ;
+            SocialStandingDataLabel.Text = Program.characterPortfolio.SocialStanding = rand.Next(1, SKILLCAP).ToString();
         }
-
-
+        #endregion
+        #region GenerateSkills
+        private void GenerateSkillsButton_Click(object sender, EventArgs e)
+        {
+            Skill skill = new Skill();
+            // read first name file and assign random to property
+            string SkillsFile = "C:\\Users\\Andre\\Desktop\\COMP123-S2019-FinalTestC\\Data\\skills.txt";
+            var readAllLinesSkillsFile = File.ReadAllLines(SkillsFile);
+            List<string> SkillsList = readAllLinesSkillsFile.ToList();
+            int SkillsFileLength = readAllLinesSkillsFile.Length;
+            skill.Name = SkillsList[rand.Next(SkillsFileLength)];
+            Program.characterPortfolio.Skills.Add(skill);
+        }
         #endregion
         #region Exit
         /// <summary>
@@ -273,5 +255,7 @@ namespace COMP123_S2019_FinalTestC.Views
             Program.aboutForm.ShowDialog();
         }
         #endregion
+
+
     }
 }

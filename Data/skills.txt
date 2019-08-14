@@ -1,6 +1,99 @@
 ﻿admin
+advocate
+animals - handling
+animals - training
+animals - veterinary
+athletics - dexterity
+athletics - endurance
+athletics - strength
+art - performer
+art - holography
+art - instrument
+art - visual media
+art - write
 astrogation
+broker
 carouse
-flyer
-gun combat
-pilot
+deception
+diplomat
+drive - hovercraft
+drive - mole
+drive - track
+drive - walker
+drive - wheel
+electronics - sensors
+electronics - comms
+electronics - computers
+electronics - remote ops
+engineer - m-drive
+engineer - j-drive
+explosives
+flyer - wing
+flyer - airship
+flyer - grav
+flyer - ornithopter
+flyer - rotor
+gambler
+gunner - turret
+gunner - ortillery
+gunner - screen
+gunner - capital
+gun combat - archaic
+gun combat - energy
+gun combat - slug
+heavy weapons - artillery
+heavy weapons - man portable
+heavy weapons - vehicle
+investigate
+jack of all trades
+language - anglic
+language - vilani
+language - zdeti
+language - oynprith
+leadership
+mechanic
+medic
+melee - unarmed
+melee - blade
+melee - bludgeon
+melee - natural
+navigation
+persuade
+pilot - small craft
+pilot - spacecraft
+pilot - capital ships
+profession - belter
+profession - biologicals
+profession - civil engineering
+profession - construction
+profession - hydroponics
+profession - polymers
+recon
+science - archaeology
+science - astronomy
+science - biology
+science - chemistry
+science - cosmology
+science - cybernetics
+science - economics
+science - genetics
+science - history
+science - linguistics
+science - philosophy
+science - physics
+science - planetology
+science - psionicology
+science - psychology
+science - robotics
+science - sophontology
+science - xenology
+seafarer - ocean ships
+seafarer - sail
+seafarer - submarine
+stealth
+steward
+streetwise
+survival
+tactics - military
+tactics - naval
+vacc suit

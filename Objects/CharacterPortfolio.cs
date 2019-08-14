@@ -25,7 +25,7 @@ namespace COMP123_S2019_FinalTestC.Objects
         public string SocialStanding { get; set; }
         
         // skill list
-        List<Skill> Skills;
+        public List<Skill> Skills;
 
         // Character Portfolio constructor
         public CharacterPortfolio()
