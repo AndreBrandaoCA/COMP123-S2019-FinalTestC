@@ -18,7 +18,6 @@ namespace COMP123_S2019_FinalTestC
     {
         public static CharacterGenerationForm characterForm;
         public static CharacterPortfolio characterPortfolio;
-        public static SplashForm splashForm;
         public static AboutForm aboutForm;
         /// <summary>
         /// The main entry point for the application.
@@ -31,12 +30,11 @@ namespace COMP123_S2019_FinalTestC
             Application.SetCompatibleTextRenderingDefault(false);
 
             // objects instantiation
-            splashForm = new SplashForm();
             characterForm = new CharacterGenerationForm();
             characterPortfolio = new CharacterPortfolio();
             aboutForm = new AboutForm();
 
-            Application.Run(splashForm);
+            Application.Run(characterForm);
         }
     }
 }
