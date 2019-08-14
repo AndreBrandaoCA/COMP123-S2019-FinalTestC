@@ -229,7 +229,6 @@ namespace COMP123_S2019_FinalTestC.Views
         #region GenerateSkills
         private void GenerateSkillsButton_Click(object sender, EventArgs e)
         {
-            Skill skill = new Skill();
             Program.characterPortfolio.Skills.Clear();
             // read first name file and assign random to property
             string SkillsFile = "..\\..\\Data\\skills.txt";
@@ -238,6 +237,7 @@ namespace COMP123_S2019_FinalTestC.Views
             int SkillsFileLength = readAllLinesSkillsFile.Length;
             for(int i=0; i <= 3; i++)
             {
+                Skill skill = new Skill();
                 skill.Name = SkillsList[rand.Next(SkillsFileLength)];
                 Program.characterPortfolio.Skills.Add(skill);
             }
