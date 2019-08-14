@@ -118,13 +118,20 @@ namespace COMP123_S2019_FinalTestC.Views
         {
             Application.Exit();
         }
-
+        /// <summary>
+        /// This is the event Handler for Character Generation Form closing event
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CharacterGenerationForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             Application.Exit();
         }
         #endregion
         #region GenerateNames
+        /// <summary>
+        /// This is the method that generate the First and Last Name for the Character Portfolio
+        /// </summary>
         private void GenerateNames()
         {
             // read first name file and assign random to property
@@ -139,16 +146,26 @@ namespace COMP123_S2019_FinalTestC.Views
             List<string> lastNameList = readAllLineslastNameFile.ToList();
             int lastNameListeFileLength = readAllLineslastNameFile.Length;
             Program.characterPortfolio.Identity.LastName = lastNameList[rand.Next(lastNameListeFileLength)];
-
+            // updating form with values
+            FirstNameDataLabel.Text = Program.characterPortfolio.Identity.FirstName;
+            LastNameDataLabel.Text = Program.characterPortfolio.Identity.LastName;
         }
         #endregion
         #region Form Load
+        /// <summary>
+        /// This is the event handler for the Generation Form Load event
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CharacterGenerationForm_Load(object sender, EventArgs e)
         {
             GenerateNames();
         }
         #endregion
         #region SaveFile
+        /// <summary>
+        /// This is the method for saving the Character Porfolio to a file
+        /// </summary>
         private void SaveFile()
         {
             // configure the file dialog
@@ -190,6 +207,11 @@ namespace COMP123_S2019_FinalTestC.Views
         }
         #endregion
         #region OpenFile
+        /// <summary>
+        /// This is the method to open a Character Portfolio from a file
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OpenFile(object sender, EventArgs e)
         {
             // configure the file dialog
@@ -248,6 +270,11 @@ namespace COMP123_S2019_FinalTestC.Views
         }
         #endregion
         #region OpenToolStripMenuItem_Click
+        /// <summary>
+        /// This is the event handler for the OpenOpenToolStripMenuItem_Click event
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OpenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenFile(sender, e);
@@ -255,7 +282,7 @@ namespace COMP123_S2019_FinalTestC.Views
         #endregion
         #region SaveToolStripButton_Click
         /// <summary>
-        /// This is the event handler for Save File button on Tool Strip and Menu Strip
+        /// This is the event handler for SaveToolStripButton_Click event
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -265,7 +292,13 @@ namespace COMP123_S2019_FinalTestC.Views
         }
 
         #endregion
+
         #region SaveToolStripMenuItem_Click
+        /// <summary>
+        /// This is the event handler for SaveToolStripMenuItem_Click event
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SaveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaveFile();
@@ -292,9 +325,7 @@ namespace COMP123_S2019_FinalTestC.Views
         private void GenerateNameButton_Click(object sender, EventArgs e)
         {
             GenerateNames();
-            // updating form with values
-            FirstNameDataLabel.Text = Program.characterPortfolio.Identity.FirstName;
-            LastNameDataLabel.Text = Program.characterPortfolio.Identity.LastName;
+
         }
         #endregion
         #region HelpToolStripButton
@@ -309,7 +340,10 @@ namespace COMP123_S2019_FinalTestC.Views
         }
         #endregion
         #region LoadCharacterSheet
-        public void LoadCharacterSheet()
+        /// <summary>
+        /// This is the method to load the Character Portfolio to the Character Sheet
+        /// </summary>
+        private void LoadCharacterSheet()
         {
             CharSheetFirstNameDataLabel.Text = Program.characterPortfolio.Identity.FirstName;
             CharSheetLastNameDataLabel.Text = Program.characterPortfolio.Identity.LastName;
@@ -319,14 +353,22 @@ namespace COMP123_S2019_FinalTestC.Views
             CharSheetIntellectDataLabel.Text = Program.characterPortfolio.Intellect;
             CharSheetEducationDataLabel.Text = Program.characterPortfolio.Education;
             CharSheetSocStandingDataLabel.Text = Program.characterPortfolio.SocialStanding;
-            CharSheetFirstCharacterSkillsDataLabel.Text = Program.characterPortfolio.Skills[0].Name;
-            CharSheetSecondCharacterSkillsDataLabel.Text = Program.characterPortfolio.Skills[1].Name;
-            CharSheetThirdCharacterSkillsDataLabel.Text = Program.characterPortfolio.Skills[2].Name;
-            CharSheetFourthCharacterSkillsDataLabel.Text = Program.characterPortfolio.Skills[3].Name;
+            if(Program.characterPortfolio.Skills.Count != 0) {
+                CharSheetFirstCharacterSkillsDataLabel.Text = Program.characterPortfolio.Skills[0].Name;
+                CharSheetSecondCharacterSkillsDataLabel.Text = Program.characterPortfolio.Skills[1].Name;
+                CharSheetThirdCharacterSkillsDataLabel.Text = Program.characterPortfolio.Skills[2].Name;
+                CharSheetFourthCharacterSkillsDataLabel.Text = Program.characterPortfolio.Skills[3].Name;
+            }
+            
         }
 
         #endregion
         #region MainTabControl_TabIndexChanged
+        /// <summary>
+        /// This is the event handler to load Character Sheet if MainTabControl_TabIndexChanged event
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MainTabControl_TabIndexChanged(object sender, EventArgs e)
         {
             if (MainTabControl.SelectedIndex == 3)
